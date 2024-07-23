@@ -1,0 +1,6 @@
+@TechnicalTaskAPI_HostAddress = https://localhost:5293
+
+GET {{TechnicalTaskAPI_HostAddress}}/customers/
+Accept: application/json
+
+###

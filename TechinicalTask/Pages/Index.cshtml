@@ -1,0 +1,71 @@
+﻿@page
+@model TechinicalTask.Pages.IndexModel
+@using TechnicalTaskAPI.Models
+
+@{
+    ViewData["Title"] = "Index";
+    var customers = Model.Customers?.ToList();
+    customers?.Sort((x, y) => DateTime.Compare(y.Created, x.Created));
+}
+
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Telephone number
+            </th>
+            <th>
+                Date created
+            </th>
+            <th>
+                Active?
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@{if(customers != null){
+                foreach (var item in customers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelephoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    }
+    }
+    </tbody>
+</table>
